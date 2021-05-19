@@ -1,7 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, \
+    BaseUserManager, PermissionsMixin
 
 from django.conf import settings
+
 
 class UserManager(BaseUserManager):
 
@@ -19,7 +21,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
-    
+
     def create_superuser(self, email, password):
         """Creates and saves a super user"""
         user = self.create_user(email, password)
@@ -54,6 +56,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Ingredient(models.Model):
     """Ingredient to be used in a recipe

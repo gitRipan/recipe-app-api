@@ -1,5 +1,4 @@
 from core.models import Recipe
-from django.forms import fields
 from rest_framework import serializers
 
 from core.models import Tag, Ingredient
@@ -38,5 +37,13 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recipe
-        fields = ('id', 'title', 'ingredients', 'tags', 'time_minutes', 'price', 'link')
+        fields = ('id', 'title', 'ingredients', 'tags',
+                  'time_minutes', 'price', 'link')
         read_only_fields = ('id',)
+
+
+class RecipeDetailSerializer(RecipeSerializer):
+    """Serialize a recipe detail
+    """
+    ingredients = IngredientSerializer(many=True, read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
